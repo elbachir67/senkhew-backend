@@ -17,6 +17,14 @@ public class Prestataire {
     @Column(nullable=false, updatable = false)
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     private String nom;
     private String prenom;
     private String nomEntreprise ;
@@ -26,6 +34,7 @@ public class Prestataire {
     private int note; // Note sous forme d'entier
     private String fonction;
     private String email;
+    private int tarif;
 
     @Column(nullable=false, unique=true)
     private String username;
@@ -36,6 +45,9 @@ public class Prestataire {
     @Column(nullable=false)
     private String role;
 
+
+    private String image;
+
     public String getRole() {
         return role;
     }
@@ -44,21 +56,10 @@ public class Prestataire {
         this.role = role;
     }
 
-    @Lob
-    private byte[] image;
-    
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     public Prestataire(){};
 
     public Prestataire(Evenement evenement,String nom, String prenom, String nomEntreprise, String desEntreprise,
-            String telephone, String adresse, String email, String fonction, String username, String password, int note , byte[] image, 
+            String telephone, String adresse, String email, String fonction, String username, String password, int tarif, int note , String image, 
             String role) {
         this.evenement = evenement;
         this.nom = nom;
@@ -73,6 +74,7 @@ public class Prestataire {
         this.password = password;
         this.role = role;
         this.note = note;
+        this.tarif = tarif;
         this.image = image;
     }
 
@@ -105,140 +107,98 @@ public class Prestataire {
         this.id = id;
     }
 
-
-
-
     public String getNom() {
         return nom;
     }
-
-
-
 
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-
-
-
     public String getPrenom() {
         return prenom;
     }
-
-
-
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
-
-
-
     public String getNomEntreprise() {
         return nomEntreprise;
     }
-
-
-
 
     public void setNomEntreprise(String nomEntreprise) {
         this.nomEntreprise = nomEntreprise;
     }
 
-
-
-
     public String getDesEntreprise() {
         return desEntreprise;
     }
-
-
-
 
     public void setDesEntreprise(String desEntreprise) {
         this.desEntreprise = desEntreprise;
     }
 
-
-
-
     public String getTelephone() {
         return telephone;
     }
-
-
-
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
-
-
-
     public String getAdresse() {
         return adresse;
     }
-
-
-
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
 
-
-
-
     public String getEmail() {
         return email;
     }
-
-
-
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-
-
-
     public String getFonction() {
         return fonction;
     }
-
-
-
 
     public void setFonction(String fonction) {
         this.fonction = fonction;
     }
 
+    
+    public String getImage() {
+        return image;
+    }
 
-
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getPassword() {
         return password;
     }
 
-
-
-
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
 
     public int getNote() {
         return note;
     }
 
+    public int getTarif() {
+        return tarif;
+    }
 
+    public void setTarif(int tarif) {
+        this.tarif = tarif;
+    }
 
     public void setNote(int note) {
         this.note = note;

@@ -24,28 +24,27 @@ public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String nomEvenement;
     private Date dateEvenement;
     private String typeEvenement;
     private String lieu;
     private String description;
-    private String serviceRequis;
     private int budget;
-    private Date dateDebut; // Ajout de l'attribut date de début
-    private Date dateFin;   // Ajout de l'attribut date de fin
+    private int duree;
+
 
 
     public Evenement() {}; //Constructeur par defaut
 
-    public Evenement(String typeEvenement, Date dateEvenement, String lieu, String description,
-            String serviceRequis, int budget, Date dateDebut, Date dateFin, Client client) {
+    public Evenement(String nomEvenement, String typeEvenement, Date dateEvenement, String lieu, String description,
+            int budget,int duree, Client client) {
+        this.nomEvenement = nomEvenement;
         this.typeEvenement = typeEvenement;
         this.dateEvenement = dateEvenement;
         this.lieu = lieu;
         this.description = description;
-        this.serviceRequis = serviceRequis;
         this.budget = budget;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
+        this.duree = duree;
         this.client = client;
     }
 
@@ -70,6 +69,19 @@ public class Evenement {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public String getNomEvenement() {
+        return nomEvenement;
+    }
+
+    public void setNomEvenement(String nomEvenement) {
+        this.nomEvenement = nomEvenement;
     }
 
     public Date getDateEvenement() {
@@ -104,14 +116,6 @@ public class Evenement {
         this.description = description;
     }
 
-    public String getServiceRequis() {
-        return serviceRequis;
-    }
-
-    public void setServiceRequis(String serviceRequis) {
-        this.serviceRequis = serviceRequis;
-    }
-
     public int getBudget() {
         return budget;
     }
@@ -120,19 +124,11 @@ public class Evenement {
         this.budget = budget;
     }
 
-    public Date getDateDebut() {
-        return dateDebut;
+    public int getDuree() {
+        return duree;
     }
 
-    public void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
-    }
-
-    public Date getDateFin() {
-        return dateFin;
-    }
-
-    public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
+    public void setDuree(int duree) {
+        this.duree = duree;
     }
 } 

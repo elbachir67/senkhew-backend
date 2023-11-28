@@ -33,7 +33,7 @@ public class SecurityConfig{
 	private ClientDetailsServiceImpl clientDetailsService;
 
 	@Autowired
-	private ClientDetailsServiceImpl prestataireDetailsService;
+	private PrestataireDetailsServiceImpl prestataireDetailsService;
 	
 	@Autowired
 	private AuthEntryPoint exceptionHandler;
@@ -56,8 +56,9 @@ public class SecurityConfig{
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.authorizeRequests(authorizeRequests ->
 			authorizeRequests
-				.requestMatchers(HttpMethod.POST, "/login").permitAll()
-				.anyRequest().authenticated())
+				.requestMatchers(HttpMethod.POST, "/login","/event/new-prestataire").permitAll()
+				.anyRequest().authenticated()
+				)
 		.exceptionHandling().authenticationEntryPoint(exceptionHandler).and()
 		.addFilterBefore(authenticationFilter,
 	UsernamePasswordAuthenticationFilter.class)
