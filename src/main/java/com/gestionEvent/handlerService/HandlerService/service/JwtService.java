@@ -16,9 +16,12 @@ public class JwtService {
     static final long EXPIRATIONTIME = 86400000;
     static final String PREFIX = "Bearer";
     static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    public String getToken(String username) {
+	
+    public String getToken(String username, Long id, String role ) {
         String token = Jwts.builder()
             .setSubject(username)
+			.claim("id", id)
+			.claim("role",role)
             .setExpiration(new Date(System.currentTimeMillis()+EXPIRATIONTIME))
             .signWith(key)
             .compact();

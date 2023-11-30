@@ -1,12 +1,14 @@
 package com.gestionEvent.handlerService.HandlerService.service;
 
 
+import com.gestionEvent.handlerService.HandlerService.entities.Client;
 import com.gestionEvent.handlerService.HandlerService.entities.Evenement;
 import com.gestionEvent.handlerService.HandlerService.entities.EvenementRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EvenementService {
@@ -32,6 +34,21 @@ public class EvenementService {
 
     public Evenement createEvenement(Evenement evenement) {
         return evenementRepository.save(evenement);
+    }
+
+    public boolean evenementBelongsToClient(Long evenementId, Long clientId) {
+        Optional<Evenement> optionalEvenement = evenementRepository.findById(evenementId);
+    
+        if (optionalEvenement.isPresent()) {
+            Evenement evenement = optionalEvenement.get();
+            return evenement.getClient().getId().equals(clientId);
+        }
+    
+        return false;
+    }
+
+    public List<Evenement> getEvenementsCreatedByClient(Client client) {
+        return evenementRepository.findByClient(client);
     }
 
     public Evenement updateEvenement(Long id, Evenement evenement) {

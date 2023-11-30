@@ -1,5 +1,6 @@
 package com.gestionEvent.handlerService.HandlerService.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 //import java.util.List;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nomEvenement;
-    private Date dateEvenement;
+    private String dateEvenement;
     private String typeEvenement;
     private String lieu;
     private String description;
@@ -36,8 +37,8 @@ public class Evenement {
 
     public Evenement() {}; //Constructeur par defaut
 
-    public Evenement(String nomEvenement, String typeEvenement, Date dateEvenement, String lieu, String description,
-            int budget,int duree, Client client) {
+    public Evenement(String nomEvenement, String typeEvenement, String dateEvenement, String lieu, String description,
+            int budget,int duree, Client client, List<Prestataire> prestataires) {
         this.nomEvenement = nomEvenement;
         this.typeEvenement = typeEvenement;
         this.dateEvenement = dateEvenement;
@@ -46,6 +47,7 @@ public class Evenement {
         this.budget = budget;
         this.duree = duree;
         this.client = client;
+        this.prestataires=prestataires;
     }
 
 //-------------Gerer les relation entre les tables  
@@ -58,6 +60,14 @@ public class Evenement {
     @JoinColumn(name = "client")
     private Client client;
 
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public List<Prestataire> getPrestataires() {
     return prestataires;
@@ -84,11 +94,11 @@ public class Evenement {
         this.nomEvenement = nomEvenement;
     }
 
-    public Date getDateEvenement() {
+    public String getDateEvenement() {
         return dateEvenement;
     }
 
-    public void setDateEvenement(Date dateEvenement) {
+    public void setDateEvenement(String dateEvenement) {
         this.dateEvenement = dateEvenement;
     }
 

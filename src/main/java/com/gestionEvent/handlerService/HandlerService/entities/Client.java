@@ -52,7 +52,7 @@ public class Client {
     private String password;
 
     // @JsonIgnore
-    @Column(nullable=false)
+    
     private String role;
 
 
@@ -67,7 +67,7 @@ public class Client {
     public Client() { }
 
     public Client(String nom, String prenom, int age, String sexe, String telephone, String adresse, String mail,
-            String username, String password, String role) {
+            String username, String password) {
         super();
         this.nom = nom;
         this.prenom = prenom;
@@ -78,7 +78,6 @@ public class Client {
         this.mail = mail;
         this.username =username;
         this.password = password;
-        this.role = role;
     }
 
     public Long getId() {

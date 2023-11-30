@@ -7,20 +7,40 @@ import java.util.List;
 import com.gestionEvent.handlerService.HandlerService.entities.Prestataire;
 import com.gestionEvent.handlerService.HandlerService.entities.PrestataireRepository;
 
+import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class PrestataireService  {
 
-    //@Autowired
+    private  BCryptPasswordEncoder passwordEncoder;
+  
     private final PrestataireRepository prestataireRepository;
 
-    public PrestataireService(PrestataireRepository prestataireRepository){
+
+    public PrestataireService(PrestataireRepository prestataireRepository,BCryptPasswordEncoder passwordEncoder){
         this.prestataireRepository=prestataireRepository;
+        this.passwordEncoder=passwordEncoder;
     }
+
+
+    public void inscription(Prestataire prestataire){
+        String mdpCrypte = this.passwordEncoder.encode(prestataire.getPassword());
+        prestataire.setPassword(mdpCrypte);
+        prestataire.setRole("PRESTATAIRE");
+        prestataireRepository.save(prestataire);
+    }
+
+    public String getRoleUsername(String username){
+        return prestataireRepository.findRoleUsername(username);
+    }
+
 
     public List<Prestataire> getAll() {
         return (List<Prestataire>) prestataireRepository.findAll();

@@ -56,7 +56,7 @@ public class SecurityConfig{
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.authorizeRequests(authorizeRequests ->
 			authorizeRequests
-				.requestMatchers(HttpMethod.POST, "/login","/event/new-prestataire").permitAll()
+				.requestMatchers(HttpMethod.POST, "/login","/inscriptionClient","/inscriptionPrestataire","/event/evenements/create").permitAll()
 				.anyRequest().authenticated()
 				)
 		.exceptionHandling().authenticationEntryPoint(exceptionHandler).and()
@@ -90,6 +90,9 @@ public class SecurityConfig{
 		.passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
-	
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
 	
 }

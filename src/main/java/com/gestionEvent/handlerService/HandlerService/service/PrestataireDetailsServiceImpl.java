@@ -28,7 +28,7 @@ public class PrestataireDetailsServiceImpl implements UserDetailsService {
             Prestataire currentUser = user.get();
             builder = org.springframework.security.core.userdetails.User.withUsername(username);
             builder.password(currentUser.getPassword());
-            builder.roles(currentUser.getRole());
+            //builder.roles(currentUser.getRole());
         } else {
             throw new UsernameNotFoundException("User not found.");
         }

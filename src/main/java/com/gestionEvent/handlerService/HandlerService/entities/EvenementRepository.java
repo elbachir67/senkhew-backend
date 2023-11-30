@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import com.gestionEvent.handlerService.HandlerService.entities.Evenement;
@@ -13,9 +14,9 @@ import java.util.List;
 
 import java.util.Date;
 
-@Repository
+@RepositoryRestResource(path = "evenements")
 public interface EvenementRepository extends  CrudRepository <Evenement, Long> {
 
-
+    List<Evenement> findByClient(Client client);
 
 }

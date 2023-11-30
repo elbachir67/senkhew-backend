@@ -4,14 +4,21 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.MediaType;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gestionEvent.handlerService.HandlerService.HandlerServiceApplication;
 import com.gestionEvent.handlerService.HandlerService.entities.Prestataire;
 import com.gestionEvent.handlerService.HandlerService.service.PrestataireService;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,14 +29,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-
-
+@AllArgsConstructor
+@Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 public class PrestataireController {
+    
     private final PrestataireService prestataireService;
 
-    public PrestataireController(PrestataireService prestataireService) {
-        this.prestataireService = prestataireService;
+    private static final Logger logger = LoggerFactory.getLogger(HandlerServiceApplication.class);
+
+    @PostMapping(path = "/inscriptionPrestataire")
+    public void inscription(@RequestBody Prestataire prestataire){
+        logger.info("InscriptionPrestataire");
+        prestataireService.inscription(prestataire);
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
