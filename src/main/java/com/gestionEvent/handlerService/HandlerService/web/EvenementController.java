@@ -51,7 +51,7 @@ public class EvenementController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/client")
     public ResponseEntity<List<Evenement>> getEvenementsCreatedByUser(@PathVariable Long id) {
     Optional<Client> optionalClient = clientRepository.findById(id);
     
@@ -64,33 +64,26 @@ public class EvenementController {
     }
     }
 
-    @GetMapping("/{id}/client")
-    public ResponseEntity<Client> getEvenementClient(@PathVariable Long id) {
-        Evenement evenement = evenementService.getEvenementById(id);
+    // @GetMapping("/{id}/client")
+    // public ResponseEntity<Client> getEvenementClient(@PathVariable Long id) {
+    //     Evenement evenement = evenementService.getEvenementById(id);
 
-        if (evenement != null) {
-            Client client = evenement.getClient();
-            return new ResponseEntity<>(client, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+    //     if (evenement != null) {
+    //         Client client = evenement.getClient();
+    //         return new ResponseEntity<>(client, HttpStatus.OK);
+    //     } else {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+    // }
 
     @PostMapping(value="/create",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Evenement> createEvenement(@RequestBody Evenement evenement,HttpServletRequest request) {
         String username = jwtService.getAuthUser(request);
         Client client = clientRepository.findByUsername(username).orElseThrow(()-> new RuntimeException("Client not found:"+username));
         evenement.setClient(client);
-
         List<Prestataire> prestataires = evenement.getPrestataires();
-        evenement.setPrestataires(prestataires);
-        if (prestataires != null) {
-            for (Prestataire prestataire : prestataires) {
-                prestataire.setEvenement(evenement);
-            }
-        }
-
         Evenement newEvenement = evenementService.createEvenement(evenement);
+        newEvenement.setPrestataires(prestataires);
         logger.info("Event created");
         if (newEvenement!= null){
             return new ResponseEntity<>(evenementService.createEvenement(newEvenement), HttpStatus.OK);
