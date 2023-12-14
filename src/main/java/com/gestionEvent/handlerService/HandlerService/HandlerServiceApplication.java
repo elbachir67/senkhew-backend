@@ -55,7 +55,7 @@ public class HandlerServiceApplication implements CommandLineRunner {
 		erepository.saveAll(Arrays.asList(e4,e1,e2,e3));
 
 
-		String b ="/home/pegasus77/Documents/Projects/ProjetGL/evens_manager-frontend/src/assets/img/photographe.jpg";
+		String b ="C:\\codes\\sen_evts\\isi\\evens_manager-frontend-CMC\\src\\assets\\imgphotographe.jpg";
 
 		Prestataire p1 = new Prestataire(e4,"Kama","Faly","6Point9","kfjsdgnfkjdjfdbkds","339089485","Dakar","coly@gmail.com","Habilleur","admin","$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW",200000,5,b,"ADMIN");
 		Prestataire p2 = new Prestataire(e3,"Doumbia","Mansour","NessNessi","on est meilleur","789340348","Ziguinchor","diagne@gmail.com","Photographe","user","$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue",450000,3,b,"USER");
